@@ -20,6 +20,8 @@ do
 done < "$input"
 ```
 
+{sample}_virema_Recombination_Results.txt must be manually parsed to isolate virus1 --> virus2 and virus2 -->virus1 recombination junctions. Future releases will contain a script/functionality for automatic parsing. Save files as {sample}_virus1_to_virus2.txt and {sample}_virus2_to_virus1.txt
+
 2) Nanopore datasets should also be aligned to the genomes but this time using minimap2. Please download FLAIR to utilize its junction detection abilities. See https://github.com/BrooksLabUCSC/flair
 
 Example workflow:
@@ -50,5 +52,21 @@ do
 done < "$input"
 ```
 
-## Usage
+## R script usage (short-read Illlumina RNA-seq datasets)
+**Junction_Pattern_Plots.R**
+Requires editing of scripts in RStudio. Future releases will be in Python and command-line executable.
+Required packages:
+ggplot2
+
+1) edit input data:
+```
+data <- read.table("./{sample}_MERS_to_SARS2_junctions.txt", header = TRUE)
+```
+2) edit output names:
+
+```
+ggsave(filename = "{sample}_virus1_to_virus2_junctions.tiff", plot = last_plot(), device = "tiff", path = "path/to/Junction_Plots/", scale = 1, width = 6, height = 4, units = "in", dpi = 1200, limitsize = TRUE)
+```
+
+## Python script usage (direct RNA Nanopore sequencing datasets)
 Section under construction.
